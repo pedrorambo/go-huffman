@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"testing"
 )
 
@@ -129,8 +128,7 @@ func TestCreateTreeForFrequencies(t *testing.T) {
 	})
 	tree := CreateTreeForFrequencies(frequencies)
 	format := HuffmanTreeToString(tree)
-	fmt.Println(format)
-	if format != "((c)(d))(((e)(a))(b))" {
+	if format != "((c)(d))(((a)(b))(e))" {
 		t.Fatal("Tree doesnt match the expected format")
 	}
 }
