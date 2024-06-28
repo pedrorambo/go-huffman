@@ -6,19 +6,19 @@ import (
 )
 
 func TestConvertHuffmanTreeToString(t *testing.T) {
-	left := *&huffmanNode{
+	left := huffmanNode{
 		value:     byte('a'),
 		frequency: 10,
 		left:      nil,
 		right:     nil,
 	}
-	rightRight := *&huffmanNode{
+	rightRight := huffmanNode{
 		value:     byte('b'),
 		frequency: 20,
 		left:      nil,
 		right:     nil,
 	}
-	rightLeft := *&huffmanNode{
+	rightLeft := huffmanNode{
 		value:     byte('c'),
 		frequency: 30,
 		left:      nil,
