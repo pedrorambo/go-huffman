@@ -16,23 +16,6 @@ type huffmanNode struct {
 	right     *huffmanNode
 }
 
-type ByteFrequency struct {
-	value     byte
-	frequency int
-	node      *huffmanNode
-}
-
-func getTreeFrequency(node *huffmanNode) int {
-	if node == nil {
-		return 0
-	}
-	if node.left == nil && node.right == nil {
-		return node.frequency
-	} else {
-		return getTreeFrequency(node.left) + getTreeFrequency(node.right)
-	}
-}
-
 type treeLookupItem struct {
 	value  byte
 	bitSet BitSet
@@ -176,39 +159,14 @@ func CreateTreeForFrequencies(frequencies []ByteFrequency) *huffmanNode {
 }
 
 func main() {
-
 	f, err := os.Open("./file.txt")
 	if err != nil {
 		panic(err)
 	}
 
-	br := bufio.NewReader(f)
+	reader := bufio.NewReader(f)
 
-	var foundBytes map[byte]int = make(map[byte]int)
-
-	for {
-		b, err := br.ReadByte()
-
-		if err != nil && !errors.Is(err, io.EOF) {
-			panic(err)
-		}
-
-		if err != nil {
-			break
-		}
-
-		existingCount := foundBytes[b]
-		foundBytes[b] = existingCount + 1
-	}
-
-	var frequencies []ByteFrequency
-
-	for k, v := range foundBytes {
-		frequencies = append(frequencies, ByteFrequency{
-			value:     k,
-			frequency: v,
-		})
-	}
+	var frequencies []ByteFrequency = GetByteFrequency(reader)
 
 	lastNode := CreateTreeForFrequencies(frequencies)
 
