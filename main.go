@@ -13,13 +13,10 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-
 	reader := bufio.NewReader(f)
 
 	var frequencies []ByteFrequency = GetByteFrequency(reader)
-
 	lastNode := CreateTreeForFrequencies(frequencies)
-
 	lookupTable := generateTreeLookup(lastNode, NewBitSet())
 
 	var originalTotalSizeInBits uint64 = 0
@@ -29,7 +26,6 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-
 	newReader := bufio.NewReader(newFile)
 
 	for {
