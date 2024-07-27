@@ -22,6 +22,7 @@ func main() {
 
 	lookupTable := generateTreeLookup(lastNode, NewBitSet())
 
+	var originalTotalSizeInBits uint64 = 0
 	var newTotalSizeInBits uint64 = 0
 
 	newFile, err := os.Open("./file.txt")
@@ -39,6 +40,7 @@ func main() {
 		if err != nil {
 			break
 		}
+		originalTotalSizeInBits += 8
 
 		foundBitSet := getBitSetForLookupItem(lookupTable, b)
 
@@ -50,5 +52,8 @@ func main() {
 		newTotalSizeInBits += size
 	}
 
-	fmt.Println(newTotalSizeInBits, "bits")
+	changeInSize := originalTotalSizeInBits - newTotalSizeInBits
+	newSizePercentage := (float64(changeInSize) / float64(originalTotalSizeInBits)) * 100
+	fmt.Printf("Original size: %v bits\n", originalTotalSizeInBits)
+	fmt.Printf("Deflated size: %v bits (deflated %.2f%%)\n", newTotalSizeInBits, newSizePercentage)
 }
