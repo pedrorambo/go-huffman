@@ -9,7 +9,14 @@ import (
 )
 
 func main() {
-	f, err := os.Open("./file.txt")
+	if len(os.Args) < 2 {
+		fmt.Fprintf(os.Stderr, "Pass the file name as an argument to the program.\n%s <file_name>\n", os.Args[0])
+		os.Exit(1)
+	}
+
+	filenameArgument := os.Args[1]
+
+	f, err := os.Open(filenameArgument)
 	if err != nil {
 		panic(err)
 	}
@@ -22,7 +29,7 @@ func main() {
 	var originalTotalSizeInBits uint64 = 0
 	var newTotalSizeInBits uint64 = 0
 
-	newFile, err := os.Open("./file.txt")
+	newFile, err := os.Open(filenameArgument)
 	if err != nil {
 		panic(err)
 	}
@@ -51,5 +58,5 @@ func main() {
 	changeInSize := originalTotalSizeInBits - newTotalSizeInBits
 	newSizePercentage := (float64(changeInSize) / float64(originalTotalSizeInBits)) * 100
 	fmt.Printf("Original size: %v bits\n", originalTotalSizeInBits)
-	fmt.Printf("Deflated size: %v bits (deflated %.2f%%)\n", newTotalSizeInBits, newSizePercentage)
+	fmt.Printf("Compressed size: %v bits (reduced %.2f%%)\n", newTotalSizeInBits, newSizePercentage)
 }
