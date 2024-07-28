@@ -1,4 +1,4 @@
 [Huffman coding](https://en.wikipedia.org/wiki/Huffman_coding) implemented in Golang.
 
-https://github.com/user-attachments/assets/672355cc-a3c5-4612-9608-17f0174c819f
+https://github.com/user-attachments/assets/ec1515a0-c1ba-4f59-9b15-96304fd13e65
 
